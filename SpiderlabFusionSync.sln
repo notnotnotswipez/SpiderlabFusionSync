@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpiderlabFusionSync", "SpiderlabFusionSync\SpiderlabFusionSync.csproj", "{A30F2DBE-7760-44FB-A5E1-845729DEB9A1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A30F2DBE-7760-44FB-A5E1-845729DEB9A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A30F2DBE-7760-44FB-A5E1-845729DEB9A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A30F2DBE-7760-44FB-A5E1-845729DEB9A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A30F2DBE-7760-44FB-A5E1-845729DEB9A1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C8F2758D-E775-4AAB-A019-9E43138A9E2B}
+	EndGlobalSection
+EndGlobal
