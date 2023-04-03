@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using System.Reflection;
+using BoneLib;
 using HarmonyLib;
 using LabFusion.Network;
 using LabFusion.Representation;
@@ -60,6 +62,84 @@ namespace SpiderlabFusionSync
                     }
                 }
             }
+        }
+
+        [HarmonyPatch(typeof(WebShooter), "HandleAiming")]
+        public static class HandleAimingPatch
+        {
+            public static bool Prefix(WebShooter __instance)
+            {
+                Hand hand = ReflectionUtils.GetFieldValue<Hand>(__instance, "hand");
+                if (Player.GetObjectInHand(hand) != null)
+                {
+                    ReflectionUtils.InvokeMethod(__instance, "ToggleReticle", new object[]{false});
+                    return false;
+                }
+
+                Transform aimReticle = ReflectionUtils.GetFieldValue<Transform>(__instance, "aimReticle");
+                LayerMask layerMask = ReflectionUtils.GetFieldValue<LayerMask>(__instance, "layerMask");
+                aimReticle.rotation = Quaternion.LookRotation(Player.playerHead.forward);
+                RaycastHit[] hits = Physics.RaycastAll(__instance.transform.position, __instance.transform.forward, 70f);
+ 
+                RaycastHit hitPlayer = default(RaycastHit);
+                bool foundPlayer = false;
+                bool ignoreFound = false;
+  
+                List<RaycastHit> validHits = new List<RaycastHit>();
+                foreach (var hit in hits)
+                {
+                    bool isInLayerMask = layerMask.Includes(hit.collider.gameObject.layer);
+                    if (isInLayerMask)
+                    {
+                        validHits.Add(hit);
+                    }
+                    if (hit.rigidbody != null)
+                    {
+                        if (hit.rigidbody.transform.root.name == PlayerRepManager.PlayerRepName)
+                        {
+                            hitPlayer = hit;
+                            foundPlayer = true;
+                        }
+                    }
+                }
+
+                if (foundPlayer)
+                {
+                    foreach (var validHit in validHits)
+                    {
+                        if (validHit.distance < hitPlayer.distance)
+                        {
+                            ignoreFound = true;
+                        }
+                    }
+                }
+                
+                if (foundPlayer && !ignoreFound)
+                {
+                    aimReticle.position = hitPlayer.point;
+                    ReflectionUtils.InvokeMethod(__instance, "ToggleReticle", new object[]{true});
+                    if (ReflectionUtils.InvokeMethod<bool>(__instance, "CanShootWebLine", null))
+                    {
+                        ReflectionUtils.InvokeMethod(__instance, "CreateWebJoint", new object[]{hitPlayer});
+                        ReflectionUtils.InvokeMethod(__instance, "PlayAudio", new object[] { BundleModuleAssets.Assets.webLineAudioHigh, BundleModuleAssets.Assets.webLineAudioLow });
+                        hand.Controller.haptor.Haptic_Tap();
+                        ReflectionUtils.InvokeMethod(__instance, "ToggleReticle", new object[]{false});
+                        return false;
+                    }
+                    return false;
+                }
+                return true;
+            }
+        }
+    }
+    
+    public static class LayerMaskExtensions
+    {
+        public static bool Includes(
+            this LayerMask mask,
+            int layer)
+        {
+            return (mask.value & 1 << layer) > 0;
         }
     }
 }

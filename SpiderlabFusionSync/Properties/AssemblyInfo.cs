@@ -7,8 +7,8 @@ using System.Runtime.InteropServices;
 using LabFusion.SDK.Modules;
 
 // ...
-[assembly: MelonInfo(typeof(Class1), "SpiderlabFusionSync", "1.0.0", "notnotnotswipez")]
-[assembly: ModuleInfo(typeof(ModuleClass), "SpiderlabFusionModule", "1.0.0", "notnotnotswipez", "spidermodule", true, ConsoleColor.Red)]
+[assembly: MelonInfo(typeof(Class1), "SpiderlabFusionSync", "1.1.0", "notnotnotswipez")]
+[assembly: ModuleInfo(typeof(ModuleClass), "SpiderlabFusionModule", "1.1.0", "notnotnotswipez", "spidermodule", true, ConsoleColor.Red)]
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information

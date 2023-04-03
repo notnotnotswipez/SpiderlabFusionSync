@@ -161,3 +161,5 @@ D:\VisualStudioProjects\SpiderlabFusionSync\SpiderlabFusionSync\obj\Debug\Spider
 D:\VisualStudioProjects\SpiderlabFusionSync\SpiderlabFusionSync\obj\Debug\SpiderlabFusionSync.csproj.CopyComplete
 D:\VisualStudioProjects\SpiderlabFusionSync\SpiderlabFusionSync\obj\Debug\SpiderlabFusionSync.dll
 D:\VisualStudioProjects\SpiderlabFusionSync\SpiderlabFusionSync\obj\Debug\SpiderlabFusionSync.pdb
+D:\VisualStudioProjects\SpiderlabFusionSync\SpiderlabFusionSync\bin\Debug\BoneLib.dll
+D:\VisualStudioProjects\SpiderlabFusionSync\SpiderlabFusionSync\bin\Debug\BoneLib.xml
